@@ -11,7 +11,7 @@ require_once(__DIR__ . '/../src/TeegonClient.php');
 
 // 新建对象 填入在Teegon平台上注册的信息 本地测试的话随意填写就行了
 // 第四个参数 $socket socket文件地址，如果有则优先选择socke方式 ,$socket = "unix:///tmp/api_provider.sock"
-$client = new TeegonClient($url = 'http://api.teegon.com/router', $key = 'xjMeB4h', $secret = 'FkJtb5weE4dSNYX8waj4');
+$client = new TeegonClient($url = 'http://api.teegon.com/router', $key = 'xjMdeBd4h', $secret = 'FkJdftb5wgeE4dSNYX8waj4');
 
 $param = [
     'user_eid' => 'test',
