@@ -18,6 +18,5 @@ PHP Teegon SDK下载后直接使用无需安装，目前没有PHP版本要求。
 
 ## Teegon Client 用法 ##
 - [快速开始](get.md)
-- [详细请求方法GET/POST/](rpc.md)
 
 
