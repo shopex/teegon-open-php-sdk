@@ -1,0 +1,21 @@
+{
+    "name": "shopex/teegon",
+    "description": "SDK for shopex teegon platform",
+    "keywords": ["shopex", "teegon", "api"],
+    "homepage": "http://github.com/shopex/teegon-open-php-sdk",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cai Yun Chen",
+            "email": "caiyunchen@shopex.cn",
+            "homepage": "http://www.shopex.cn/"
+        }
+    ],
+    "require": {
+        "php": ">=5.0.0"
+    },
+    "autoload": {
+        "classmap": ["src/"]
+    }
+}
