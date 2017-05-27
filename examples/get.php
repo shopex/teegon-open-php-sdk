@@ -3,9 +3,16 @@
 ini_set("display_errors", "On");
 error_reporting(E_ERROR);
 header("Content-type: text/html; charset=utf-8");
-require_once(__DIR__ . '/../src/TeegonClient.php');
+require_once("../vendor/autoload.php");
 
+use Shopex\TeegonClient\TeegonClient as TeegonClient;
 
+$client = new TeegonClient();
+
+$res = $client->get('aaaa', [], []);
+var_dump($res);
+
+/**
 // 运行example前先要起个服务器，比如我们用PHP的自带dev-server:
 // php -S 0.0.0.0:8080 example/server-router.php
 
@@ -18,3 +25,5 @@ $client = new TeegonClient($url = 'http://api.teegon.com/router', $key = 'xjMdeB
 $res = $client->post('shopex.queue.read', array('topic'=>'orders', 'num'=>1,'drop'=>false));
 echo $res;
 // 返回: pong
+
+**/

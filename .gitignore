@@ -1,0 +1,9 @@
+/vendor
+/.idea
+composer.lock
+TAGS
+.env
+*.swp
+\#*
+*~
+\.#*
