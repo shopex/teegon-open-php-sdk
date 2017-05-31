@@ -3,6 +3,7 @@ namespace Shopex\TeegonClient\Requesters;
 
 use Shopex\TeegonClient\Response as Response;
 use GuzzleHttp\Client as Client;
+use GuzzleHttp\Exception\RequestException as RequestException;
 
 class GuzzleRequester
 {
@@ -15,7 +16,12 @@ class GuzzleRequester
         if($postData) $options['body'] = http_build_query($postData);
 
         $client = new Client();
-        $res = $client->request($http_method, $final_url, $options);
+        try{
+            $res = $client->request($http_method, $final_url, $options);
+        }catch(RequestException $requestException){
+            $res = $requestException->getResponse();
+        }
+
 
         $response = new Response(
             $res->getStatusCode(),
