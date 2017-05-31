@@ -1,7 +1,11 @@
 <?php
 namespace Shopex\TeegonClient;
 
-use Shopex\TeegonClient\Response;
+
+use Shopex\TeegonClient\Requester as Requester;
+use Shopex\TeegonClient\Response as Response;
+use Shopex\TeegonClient\Request as Request;
+use Shopex\TeegonClient\Transformer as Transformer;
 
 class TeegonClient
 {
@@ -24,7 +28,9 @@ class TeegonClient
 
     public function __construct($url, $key, $secret)
     {
-
+        $this->__requester = new Requester('guzzle');
+        $this->__transformer = new Transformer($url, $key, $secret);
+        $this->__url = $url;
     }
 
     public function get($method, $params = null, $headers = null)
@@ -48,13 +54,16 @@ class TeegonClient
     }
 
     /**
-     *
+     * @param string type (GET/POST/DELETE/PUT)
+     * @param string method 接口名称
+     * @param array params 要传递的参数
+     * @param array headers api请求时的header头信息
      *
      * @return string
      */
-    public function request($type, $method, $params, $headers)
+    public function request($type, $method, $params, $headers = [])
     {
-        $response = $this->__sendRequest($type, $method, $params, $headers);
+        $response = $this->sendRequest($type, $method, $params, $headers);
         return $response->getBody();
     }
 
@@ -63,9 +72,22 @@ class TeegonClient
      *
      * @return Shopex\TeegonClient\Response
      */
-    public function sendRequest($type, $method, $params, $headers)
+    public function sendRequest($type, $method, $params, $headers = [])
     {
-        return $this->__requester->createRequest($type, $path, $params, $headers);
+        $debugData = [
+            'type' => $type,
+            'method' => $method,
+            'params' => $params,
+            'headers' => $headers,
+        ];
+//      var_dump($debugData);exit;
+
+
+        $request = $this->__transformer->makeRequest($type, $method, $params, $headers);
+
+        var_dump($request);exit;
+
+        return $this->__requester->createRequest($request);
     }
 }
 

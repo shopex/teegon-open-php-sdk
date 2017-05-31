@@ -1,13 +1,17 @@
 <?php
 //报告所有错误
 ini_set("display_errors", "On");
-error_reporting(E_ERROR);
 header("Content-type: text/html; charset=utf-8");
 require_once("../vendor/autoload.php");
 
 use Shopex\TeegonClient\TeegonClient as TeegonClient;
 
-$client = new TeegonClient($url = 'http://api.teegon.com/router', $key = 'xjMdeBd4h', $secret = 'FkJdftb5wgeE4dSNYX8waj4');
+$client = new TeegonClient(
+    $url = 'http://api.teegon.com/router',
+    $key = 'xjMdeBd4h',
+    $secret = 'FkJdftb5wgeE4dSNYX8waj4'
+);
+
 $res = $client->post('shopex.queue.read', array('topic'=>'orders', 'num'=>1,'drop'=>false));
 
 var_dump($res);
