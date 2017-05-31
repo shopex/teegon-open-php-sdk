@@ -8,14 +8,15 @@ use Shopex\TeegonClient\TeegonClient as TeegonClient;
 
 $client = new TeegonClient(
     $url = 'http://api.teegon.com/router',
-    $key = 'xjMdeBd4h',
-    $secret = 'FkJdftb5wgeE4dSNYX8waj4'
+    $key = 'dchv2hq52bfa3e536j5j6djm',
+    $secret = 'd2sfrr5xgvo7hj6ebilkfjfigakqapdb'
 );
 
 try{
-    $res = $client->post('shopex.queue.read', array('topic'=>'orders', 'num'=>1,'drop'=>false));
+    $res = $client->post('store.apigateway.request');
 }catch(Exception $e){
     echo $e->getMessage();
+//  var_dump($e->__toString());
     exit;
 }
 

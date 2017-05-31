@@ -16,6 +16,20 @@ class Transformer
         $this->__secret = $secret;
     }
 
+    public function makeRestfulRequest($type, $method, $params = [], $header = [])
+    {
+        $request = new Request();
+        $request->base_url = rtrim($this->__url, '/') . $method;
+        $request->http_method = $type;
+        $request->method = $method;
+
+        $allParams = $this->genParams($type, $method, $params, $header);
+        $request->query = $allParams['query'];
+        $request->headers = $allParams['headers'];
+        $request->post_data = $allParams['post_data'];
+        return $request;
+    }
+
     public function makeRequest($type, $method, $params = [], $header = [])
     {
         $request = new Request();

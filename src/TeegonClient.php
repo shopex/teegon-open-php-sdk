@@ -21,16 +21,22 @@ class TeegonClient
     private $__requester;
 
     /**
+     * 用于标识是否是restful请求
+     */
+    private $__isRestful;
+
+    /**
      * 用来转换数据的，把请求的数据转换成天工接收的数据
      * 目前主要用来做签名
      */
     private $__transformer;
 
-    public function __construct($url, $key, $secret)
+    public function __construct($url, $key, $secret, $isRestful = false)
     {
         $this->__requester = new Requester('guzzle');
         $this->__transformer = new Transformer($url, $key, $secret);
         $this->__url = $url;
+        $this->__isRestful = $isRestful;
     }
 
     public function get($method, $params = null, $headers = null)
@@ -74,16 +80,23 @@ class TeegonClient
      */
     public function sendRequest($type, $method, $params, $headers = [])
     {
-        $debugData = [
-            'type' => $type,
-            'method' => $method,
-            'params' => $params,
-            'headers' => $headers,
-        ];
+//      $debugData = [
+//          'type' => $type,
+//          'method' => $method,
+//          'params' => $params,
+//          'headers' => $headers,
+//      ];
 //      var_dump($debugData);exit;
 
 
-        $request = $this->__transformer->makeRequest($type, $method, $params, $headers);
+        if($this->__isRestful)
+        {
+            $request = $this->__transformer->makeRestfulRequest($type, $method, $params, $headers);
+        }
+        else
+        {
+            $request = $this->__transformer->makeRequest($type, $method, $params, $headers);
+        }
 
         return $this->__requester->createRequest($request);
     }
