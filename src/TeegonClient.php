@@ -85,8 +85,6 @@ class TeegonClient
 
         $request = $this->__transformer->makeRequest($type, $method, $params, $headers);
 
-        var_dump($request);exit;
-
         return $this->__requester->createRequest($request);
     }
 }

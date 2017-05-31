@@ -12,7 +12,12 @@ $client = new TeegonClient(
     $secret = 'FkJdftb5wgeE4dSNYX8waj4'
 );
 
-$res = $client->post('shopex.queue.read', array('topic'=>'orders', 'num'=>1,'drop'=>false));
+try{
+    $res = $client->post('shopex.queue.read', array('topic'=>'orders', 'num'=>1,'drop'=>false));
+}catch(Exception $e){
+    echo $e->getMessage();
+    exit;
+}
 
 var_dump($res);
 

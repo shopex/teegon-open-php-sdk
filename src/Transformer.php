@@ -19,6 +19,7 @@ class Transformer
     public function makeRequest($type, $method, $params = [], $header = [])
     {
         $request = new Request();
+        $request->base_url = $this->__url;
         $request->http_method = $type;
         $request->method = $method;
 
