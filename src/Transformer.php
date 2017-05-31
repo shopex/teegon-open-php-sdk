@@ -81,7 +81,7 @@ class Transformer
         $query['method'] = $method;
 
         $query['sign'] = $this->produce(
-            $method,
+            $type,
             $url_arr['path'],
             $headers,
             $query,
