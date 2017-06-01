@@ -10,7 +10,7 @@ class Response
 
     private $__header;
 
-    public function __construct($statusCode, $body, $header)
+    public function __construct($statusCode, $header, $body)
     {
         $this->__statusCode = $statusCode;
         $this->__body = $body;
