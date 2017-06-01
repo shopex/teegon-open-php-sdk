@@ -18,17 +18,22 @@ class GuzzleRequester
         $client = new Client();
         try{
             $res = $client->request($http_method, $final_url, $options);
+            $response = new Response(
+                $res->getStatusCode(),
+                $res->getHeaders(),
+                $res->getReasonPhrase()
+            );
+            return $response;
         }catch(RequestException $requestException){
             $res = $requestException->getResponse();
+            $response = new Response(
+                $res->getStatusCode(),
+                $res->getHeaders(),
+                RequestException::getResponseBodySummary($res)
+            );
+
+
         }
-
-
-        $response = new Response(
-            $res->getStatusCode(),
-            $res->getHeaders(),
-            $res->getBody()
-        );
-
 
         return $response;
     }
