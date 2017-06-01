@@ -21,7 +21,7 @@ class GuzzleRequester
             $response = new Response(
                 $res->getStatusCode(),
                 $res->getHeaders(),
-                $res->getReasonPhrase()
+                $res->getBody()->__toString()
             );
             return $response;
         }catch(RequestException $requestException){
@@ -29,7 +29,7 @@ class GuzzleRequester
             $response = new Response(
                 $res->getStatusCode(),
                 $res->getHeaders(),
-                RequestException::getResponseBodySummary($res)
+                $res->getBody()->__toString()
             );
 
 
