@@ -3,13 +3,29 @@
 
 
 ## 创建Teegon Client实例对象 ##
-首先我们要引用PHP Teegon SDK
+首先我们要引用PHP Teegon SDK(现在可以通过composer的方式)
 
-    require_once(__DIR__ . '/src/TeegonClient.php');
+```
+"repositories": [
+    {
+        "type": "git",
+            "url": "https://github.com/shopex/teegon-open-php-sdk.git",
+            "tagpath": "2.0.*"
+    }
+]
+
+```
 
 创建对象：
-
+```
+    //由于现在支持psr-4标准，所以在引入时需要在文件头部使用use关键词，使用命名空间
+    use Shopex\TeegonClient\TeegonClient as TeegonClient;
     $client = new TeegonClient($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
+
+    //或者直接使用class全名
+    $client = new Shopex\TeegonClient\TeegonClient($url = 'http://192.168.51.50:8080/api', $key = 'pufy2a7d', $secret = 'skqovukpk2nmdrljphgj');
+
+```
 
 三个必要参数：
 
@@ -25,7 +41,7 @@
 
     echo $client->get('shopex.query.appqueue');
 
-返回: 
+返回:
 
 {"ecode":0,"emsg":"","result":{"num":0,"queuelist":[]}}
 
