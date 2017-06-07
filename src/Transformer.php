@@ -19,7 +19,7 @@ class Transformer
     public function makeRestfulRequest($type, $method, $params = [], $header = [])
     {
         $request = new Request();
-        $request->base_url = rtrim($this->__url, '/') . $method;
+        $request->base_url = rtrim($this->__url, '/') . '/' . ltrim($method, '/');
         $request->http_method = $type;
         $request->method = $method;
 
