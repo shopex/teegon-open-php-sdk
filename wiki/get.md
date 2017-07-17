@@ -4,7 +4,6 @@
 
 ## 创建Teegon Client实例对象 ##
 首先我们要引用PHP Teegon SDK(现在可以通过composer的方式)
-
 ```
 "repositories": [
     {
@@ -13,6 +12,14 @@
             "tagpath": "2.0.*"
     }
 ]
+
+```
+ 
+然后在项目的composer.json文件中引入依赖
+```
+     "require": {
+         "shopex/teegon": "2.0.*"
+     },
 
 ```
 
