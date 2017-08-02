@@ -10,6 +10,7 @@
 - V2.0需要```composer```，如果需要使用，请参考composer官方文档
 - 导入请参考[快速开始](wiki/get.md)
 - 主要是为了规避V1.0版本采用classmap方式加载会导致class名冲突
+- [example运行方式](wiki/example.md)
 
 ### V1.0
 - 适用于不支持composer的系统
