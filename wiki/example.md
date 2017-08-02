@@ -15,7 +15,7 @@
 ```
 git clone git@github.com:shopex/teegon-open-php-sdk.git
 
-cd teegon-open-php-sdk.git
+cd teegon-open-php-sdk
 
 composer update
 
