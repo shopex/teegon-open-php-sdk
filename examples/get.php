@@ -9,11 +9,13 @@ use Shopex\TeegonClient\TeegonClient as TeegonClient;
 $client = new TeegonClient(
     $url = 'http://api.teegon.com/router',
     $key = 'dchv2hq52bfa3e536j5j6djm',
-    $secret = 'd2sfrr5xgvo7hj6ebilkfjfigakqapdb'
+    $secret = 'd2sfrr5xgvo7hj6ebilkfjfigakqapdb',
+    false,
+    $config = ['connect_timeout'=>3.2]
 );
 
 try{
-    $res = $client->post('store.apigateway.request');
+    $res = $client->post('store.apigateway.request', [], [], $config=[]);
 }catch(Exception $e){
     echo $e->getMessage();
 //  var_dump($e->__toString());

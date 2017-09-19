@@ -76,7 +76,7 @@ class TeegonClient
      *
      * @return string
      */
-    public function request($type, $method, $params, $headers = [], $config = array())
+    public function request($type, $method, $params, $headers = [], $config = [])
     {
         $response = $this->sendRequest($type, $method, $params, $headers, $config);
         return $response->getBody();
@@ -87,7 +87,7 @@ class TeegonClient
      *
      * @return Shopex\TeegonClient\Response
      */
-    public function sendRequest($type, $method, $params, $headers = [])
+    public function sendRequest($type, $method, $params, $headers = [], $config = [])
     {
 //      $debugData = [
 //          'type' => $type,
