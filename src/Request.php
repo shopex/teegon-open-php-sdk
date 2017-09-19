@@ -16,6 +16,8 @@ class Request
 
     public $post_data;
 
+    public $config;
+
     public function __construct()
     {
 
@@ -41,6 +43,11 @@ class Request
     public function getPostData()
     {
         return $this->post_data;
+    }
+
+    public function getConfig()
+    {
+        return $this->config;
     }
 
 }

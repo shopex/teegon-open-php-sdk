@@ -7,13 +7,38 @@ use GuzzleHttp\Exception\RequestException as RequestException;
 
 class GuzzleRequester
 {
+    /**
+     *
+     */
+    private $__config = null;
 
-    public function sendRequest($http_method, $final_url, $headers, $postData)
+    public function __construct($config = array())
     {
+        $this->__config = $config;
+    }
 
-        $options = [];
+    public function sendRequest($http_method, $final_url, $headers, $postData, $config = array())
+    {
+        if(is_array($this->__config))
+        {
+            $options = $this->__config;
+        }
+        else
+        {
+            throw new RuntimeException('Config info format error!');
+        }
+
         if($headers) $options['headers'] = $headers;
         if($postData) $options['body'] = http_build_query($postData);
+        if(count($config) > 0)
+        {
+            foreach($config as $key => $value)
+            {
+                if(in_array($key, ['body', 'headers'])) continue;
+
+                $options[$key] = $value;
+            }
+        }
 
         $client = new Client();
         try{

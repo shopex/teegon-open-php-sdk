@@ -6,13 +6,17 @@ use Shopex\TeegonClient\Requesters\GuzzleRequester;
 
 class Requester
 {
+    /**
+     * 这里保存httpclient
+     */
     private $__http;
 
-    public function __construct($http = 'guzzle')
+    public function __construct($http = 'guzzle', $config)
     {
+
         if($http == 'guzzle')
         {
-            $this->__http = new GuzzleRequester();
+            $this->__http = new GuzzleRequester($config);
         }
 
     }
@@ -23,8 +27,9 @@ class Requester
         $final_url   = $request->getFinalUrl();
         $headers     = $request->getHeaders();
         $postData    = $request->getPostData();
+        $config      = $request->getConfig();
 
-        $response = $this->__http->sendRequest($http_method, $final_url, $headers, $postData);
+        $response = $this->__http->sendRequest($http_method, $final_url, $headers, $postData, $config);
         return $response;
     }
 }

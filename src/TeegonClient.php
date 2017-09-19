@@ -26,37 +26,46 @@ class TeegonClient
     private $__isRestful;
 
     /**
+     * 用于保存配置信息，如果要加入配置项，以后都放在这里
+     * array(
+     *   'timeout' => intval(), //http链接超时配置
+     * );
+     */
+    private $__config;
+
+    /**
      * 用来转换数据的，把请求的数据转换成天工接收的数据
      * 目前主要用来做签名
      */
     private $__transformer;
 
-    public function __construct($url, $key, $secret, $isRestful = false)
+    public function __construct($url, $key, $secret, $isRestful = false, $config = array())
     {
-        $this->__requester = new Requester('guzzle');
-        $this->__transformer = new Transformer($url, $key, $secret);
         $this->__url = $url;
         $this->__isRestful = $isRestful;
+        $this->__config = $config;
+        $this->__requester = new Requester('guzzle', $this->__config);
+        $this->__transformer = new Transformer($this->__url, $key, $secret);
     }
 
-    public function get($method, $params = null, $headers = null)
+    public function get($method, $params = null, $headers = null, $config = array())
     {
-        return $this->request('GET', $method, $params, $headers);
+        return $this->request('GET', $method, $params, $headers, $config);
     }
 
-    public function post($method, $params = null, $headers = null)
+    public function post($method, $params = null, $headers = null, $config = array())
     {
-        return $this->request('POST', $method, $params, $headers);
+        return $this->request('POST', $method, $params, $headers, $config);
     }
 
-    public function put($method, $params = null, $headers = null)
+    public function put($method, $params = null, $headers = null, $config = array())
     {
-        return $this->request('PUT', $method, $params, $headers);
+        return $this->request('PUT', $method, $params, $headers, $config);
     }
 
-    public function delete($method, $params = null, $headers = null)
+    public function delete($method, $params = null, $headers = null, $config = array())
     {
-        return $this->request('DELETE', $method, $params, $headers);
+        return $this->request('DELETE', $method, $params, $headers, $config);
     }
 
     /**
@@ -67,9 +76,9 @@ class TeegonClient
      *
      * @return string
      */
-    public function request($type, $method, $params, $headers = [])
+    public function request($type, $method, $params, $headers = [], $config = array())
     {
-        $response = $this->sendRequest($type, $method, $params, $headers);
+        $response = $this->sendRequest($type, $method, $params, $headers, $config);
         return $response->getBody();
     }
 
@@ -91,11 +100,11 @@ class TeegonClient
 
         if($this->__isRestful)
         {
-            $request = $this->__transformer->makeRestfulRequest($type, $method, $params, $headers);
+            $request = $this->__transformer->makeRestfulRequest($type, $method, $params, $headers, $config);
         }
         else
         {
-            $request = $this->__transformer->makeRequest($type, $method, $params, $headers);
+            $request = $this->__transformer->makeRequest($type, $method, $params, $headers, $config);
         }
 
         return $this->__requester->createRequest($request);
