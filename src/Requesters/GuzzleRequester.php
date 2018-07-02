@@ -26,6 +26,7 @@ class GuzzleRequester
             return $response;
         }catch(RequestException $requestException){
             $res = $requestException->getResponse();
+            if(empty($res)) throw $requestException;
             $response = new Response(
                 $res->getStatusCode(),
                 $res->getHeaders(),
